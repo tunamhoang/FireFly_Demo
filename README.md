@@ -21,3 +21,5 @@ Face Api is mainly a face recognition application programming interface, includi
 
 
 [More details](doc/English)
+
+[Tài liệu tiếng Việt](doc/README_VI.md)
