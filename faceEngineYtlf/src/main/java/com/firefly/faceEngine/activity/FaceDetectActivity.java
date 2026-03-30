@@ -65,7 +65,7 @@ public class FaceDetectActivity extends BaseActivity implements TrackCallBack, A
         initView();
         getViewWH();
         startCountDownTimer();
-        setInfraredFillLight(true); //补光灯
+        setInfraredFillLight(true); // Bật đèn bù sáng
     }
 
     private void initView() {
@@ -111,7 +111,7 @@ public class FaceDetectActivity extends BaseActivity implements TrackCallBack, A
         }
     }
 
-    //人脸属监听回调
+    // Callback lắng nghe thuộc tính khuôn mặt
     @Override
     public void onAttributeListener(ArcternImage arcternImage, long[] trackIds, ArcternRect[] arcternRects, ArcternAttribute[][] arcternAttributes, int[] landmarks) {
         ArcternAttribute[] attributes = arcternAttributes[0];
@@ -157,7 +157,7 @@ public class FaceDetectActivity extends BaseActivity implements TrackCallBack, A
         }
     };
 
-    // 用线程池
+    // Xử lý bằng thread pool
     private void doDelivery(final ArcternImage rbgImage, final ArcternImage irImage) {
         if (future != null && !future.isDone()) {
             return;
@@ -170,9 +170,9 @@ public class FaceDetectActivity extends BaseActivity implements TrackCallBack, A
         future = executorService.submit(new Runnable() {
             @Override
             public void run() {
-                LivingInterface.rotateYUV420Degree90(rbgImage); //旋转90度
-                LivingInterface.rotateYUV420Degree90(irImage); //旋转90度
-                MatrixYuvUtils.mirrorForNv21(rbgImage.gdata, rbgImage.width, rbgImage.height);  //rbg 数据左右镜像
+                LivingInterface.rotateYUV420Degree90(rbgImage); // Xoay 90 độ
+                LivingInterface.rotateYUV420Degree90(irImage); // Xoay 90 độ
+                MatrixYuvUtils.mirrorForNv21(rbgImage.gdata, rbgImage.width, rbgImage.height);  // Lật gương trái-phải cho dữ liệu RGB
                 Tools.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -183,7 +183,7 @@ public class FaceDetectActivity extends BaseActivity implements TrackCallBack, A
         });
     }
 
-    // 处理人员信息
+    // Xử lý thông tin người dùng
     private void handlePerson() {
         Person person = mMapPeople.get(faceInfo.getSearchId());
         StringBuffer s = new StringBuffer();
@@ -197,33 +197,33 @@ public class FaceDetectActivity extends BaseActivity implements TrackCallBack, A
         showText(txt2, s);
     }
 
-    // 处理人脸属性信息
+    // Xử lý thông tin thuộc tính khuôn mặt
     private void handleAttribute() {
         ArcternAttribute[] attributes = faceInfo.getAttributes()[0];
 
         for (int i = 0; i < attributes.length; i++) {
             ArcternAttribute item = attributes[i];
             switch (i) {
-                case ArcternAttribute.ArcternFaceAttrTypeEnum.QUALITY://人脸质量
+                case ArcternAttribute.ArcternFaceAttrTypeEnum.QUALITY:// Chất lượng khuôn mặt
                     faceInfo.setFaceQualityConfidence(item.confidence);
                     break;
 
-                case ArcternAttribute.ArcternFaceAttrTypeEnum.LIVENESS_IR: //活体
+                case ArcternAttribute.ArcternFaceAttrTypeEnum.LIVENESS_IR: // Kiểm tra sống
                     faceInfo.setLiveLabel(item.label);
                     faceInfo.setLivenessConfidence(item.confidence);
                     break;
 
-                case ArcternAttribute.ArcternFaceAttrTypeEnum.FACE_MASK: //口罩
+                case ArcternAttribute.ArcternFaceAttrTypeEnum.FACE_MASK: // Khẩu trang
                     faceInfo.setFaceMask(item.label == ArcternAttribute.LabelFaceMask.MASK);
                     break;
 
-                case ArcternAttribute.ArcternFaceAttrTypeEnum.GENDER: //性别
+                case ArcternAttribute.ArcternFaceAttrTypeEnum.GENDER: // Giới tính
                     Tools.debugLog("性别:%s", item.toString());
                     faceInfo.setGender(item.label);
                     faceInfo.setGenderConfidence(item.confidence);
                     break;
 
-                case ArcternAttribute.ArcternFaceAttrTypeEnum.AGE: //年龄
+                case ArcternAttribute.ArcternFaceAttrTypeEnum.AGE: // Tuổi
                     Tools.debugLog("年龄:%s", item.toString());
                     faceInfo.setAge((int) item.confidence);
                     break;
@@ -231,7 +231,7 @@ public class FaceDetectActivity extends BaseActivity implements TrackCallBack, A
         }
     }
 
-    // 处理人脸关键坐标
+    // Xử lý các điểm mốc khuôn mặt
     private void handleLandmark(ArcternImage arcternImage, int[] landmarks) {
         try {
             Bitmap bitmap = Tools.bgr2Bitmap(arcternImage.gdata, arcternImage.width, arcternImage.height);
@@ -248,18 +248,18 @@ public class FaceDetectActivity extends BaseActivity implements TrackCallBack, A
                 }
             });
 
-            //保存bitmap本地图片
+            // Lưu bitmap ra bộ nhớ cục bộ
             //saveBitmap2Jpeg(bitmap);
         } catch (Throwable e) {
             Tools.printStackTrace(e);
         }
     }
 
-    // 显示log
+    // Hiển thị log
     private void refreshLogTextView(){
         StringBuilder attribute = new StringBuilder();
 
-        if (faceInfo.isFaceMask()) {    //口罩时，不处理人脸质量和活体
+        if (faceInfo.isFaceMask()) {    // Khẩu trang时，不处理人脸质量和活体
             attribute.append(getString(R.string.ytlf_dictionaries8))
                     .append("\n");
 
@@ -294,7 +294,7 @@ public class FaceDetectActivity extends BaseActivity implements TrackCallBack, A
                     .append("\n");
         }
 
-        if (!faceInfo.isFaceMask() && faceInfo.getFaceQualityConfidence() < 0.4) {//无口罩且质量 < 0.4
+        if (!faceInfo.isFaceMask() && faceInfo.getFaceQualityConfidence() < 0.4) {// Không đeo khẩu trang và chất lượng < 0.4
             faceView.isRed = false;
             showText(txt1, "--");
             return;
@@ -326,7 +326,7 @@ public class FaceDetectActivity extends BaseActivity implements TrackCallBack, A
     }
 
     private int times=0;
-    //保存bitmap本地图片 10次
+    // Lưu bitmap ra bộ nhớ cục bộ 10次
     private void saveBitmap2Jpeg(Bitmap bitmap){
         if(times > 10){
             return;
@@ -339,7 +339,7 @@ public class FaceDetectActivity extends BaseActivity implements TrackCallBack, A
         Tools.debugLog("result=%s, path=%s", result, path);
     }
 
-    //获得容器的高度
+    // Lấy chiều cao vùng chứa
     private void getViewWH() {
         ViewTreeObserver vto = faceView.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -352,7 +352,7 @@ public class FaceDetectActivity extends BaseActivity implements TrackCallBack, A
         });
     }
 
-    //刷新
+    // Làm mới
     private void startCountDownTimer() {
         if (mCountDownTimer != null) {
             return;

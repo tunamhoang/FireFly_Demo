@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    //权限通过
+    // Đã được cấp quyền
     protected void permissionGrant() {
     }
 }

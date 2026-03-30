@@ -150,11 +150,11 @@ public class Debug {
                     for (int i = 0; i < attributes.length; i++) {
                         ArcternAttribute item = attributes[i];
                         switch (i) {
-                            case ArcternAttribute.ArcternFaceAttrTypeEnum.QUALITY: //人脸质量
+                            case ArcternAttribute.ArcternFaceAttrTypeEnum.QUALITY: // Chất lượng khuôn mặt
                                 Tools.debugLog("%s >>> 人脸质量 %s", i, item.toString());
                                 break;
 
-                            case ArcternAttribute.ArcternFaceAttrTypeEnum.FACE_MASK: //口罩
+                            case ArcternAttribute.ArcternFaceAttrTypeEnum.FACE_MASK: // Khẩu trang
                                 Tools.debugLog("%s >>> 口罩 %s", i, item.toString());
                                 break;
 

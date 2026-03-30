@@ -23,13 +23,13 @@ import java.util.List;
 
 public class ArcternMainActivity extends BaseActivity {
 
-    // 在线获取授权 API_KEY
+    // Lấy API_KEY cấp quyền trực tuyến
     public final String API_KEY = "xrZEJz51qfiBI3FB";
 
-    // 指定本地SD卡目录，用于存放models和license公钥等文件
+    // Chỉ định thư mục SD cục bộ để chứa model và khóa license công khai
     public static String FACE_PATH = "/sdcard/firefly/";
 
-    // SDK
+    // Bộ SDK
     private YTLFFaceManager YTLFFace = YTLFFaceManager.getInstance().initPath(FACE_PATH);
 
     @Override
@@ -45,12 +45,12 @@ public class ArcternMainActivity extends BaseActivity {
         }
     }
 
-    // 是否SDK是否已可以
+    // Kiểm tra SDK đã sẵn sàng chưa
     private boolean isFaceSdkReady() {
         return YTLFFaceManager.isSDKRuning && YTLFFaceManager.isLoadDB;
     }
 
-    // 初始化SDK
+    // Khởi tạo SDK
     private void initSdk(Runnable runnable) {
         Tools.showLoadingProgress(this, false);
         new Thread(new Runnable() {
@@ -81,7 +81,7 @@ public class ArcternMainActivity extends BaseActivity {
         }).start();
     }
 
-    // 检测环境，并运行
+    // Kiểm tra môi trường và chạy
     private void runOnFaceSdkReady(Runnable runnable) {
         if (isFaceSdkReady()) {
             if (runnable != null) {

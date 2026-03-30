@@ -84,7 +84,7 @@ public class DBActivity extends BaseActivity implements ExtractCallBack {
 
         if (bitmapFeature != null) {
             long id = dbManager.insertPerson(name, bitmapFeature);
-            //载入内存
+            // Nạp dữ liệu vào bộ nhớ
             int result = YTLFFace.dataBaseAdd(id, bitmapFeature);
             String s = getString(result == 0 ? R.string.ytlf_dictionaries16 : R.string.ytlf_dictionaries17);
             showShortToast(s);

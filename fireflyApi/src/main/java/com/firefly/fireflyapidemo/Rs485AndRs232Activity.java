@@ -20,7 +20,7 @@ public class Rs485AndRs232Activity extends BaseActivity implements SerialPort.Ca
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rs485_rs232);
 
-        //485串口：/dev/ttyS4  ;  232串口：/dev/ttyS3
+        // Cổng nối tiếp 485: /dev/ttyS4 ; cổng 232: /dev/ttyS3
         serialPort = HardwareCtrl.openSerialPortSignal(new File("/dev/ttyS3"), 19200, this);
 
         sendBtn = findViewById(R.id.send_rs485_rs232);
@@ -28,14 +28,14 @@ public class Rs485AndRs232Activity extends BaseActivity implements SerialPort.Ca
             @Override
             public void onClick(View v) {
                 //HardwareCtrl.sendSerialPortMsg(serialPort, "48562311");
-                //然后通过cat /dev/ttyS4 或者 cat /dev/ttyS3 查看设置的值变化。
+                // Sau đó dùng cat /dev/ttyS4 hoặc cat /dev/ttyS3 để kiểm tra giá trị thay đổi.
                 if (serialPort != null)
                     HardwareCtrl.sendSerialPortHexMsg(serialPort, "48562311");
             }
         });
     }
 
-    //rs485/232发送信号后接收返回值
+    // Nhận dữ liệu phản hồi sau khi gửi tín hiệu RS485/232
     @Override
     public void onDataReceived(byte[] bytes, int size) {
         String result = StringUtils.bytesToHexString(bytes, size);
