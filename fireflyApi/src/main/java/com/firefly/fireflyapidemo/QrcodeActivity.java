@@ -36,7 +36,7 @@ public class QrcodeActivity extends BaseActivity {
             }
         }, 3000);
 
-        // 二维码工作状态切换，会有10秒钟左右的延迟
+        // Chuyển trạng thái QR có độ trễ khoảng 10 giây
         mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -57,7 +57,7 @@ public class QrcodeActivity extends BaseActivity {
 
     private QrCodeUtil.QRCodeCallback mQRCodeCallback = new QrCodeUtil.QRCodeCallback() {
 
-        // 二维码工作状态初始化后，在onConnect()中进行最终的UI设置
+        // Sau khi khởi tạo trạng thái QR, hoàn tất thiết lập UI trong onConnect()
         @Override
         public void onConnect() {
             Tools.debugLog("onConnect: QrCodeUtil.getInstance().isQrCodeSupport() = " + QrCodeUtil.getInstance().isQrCodeSupport());
@@ -93,7 +93,7 @@ public class QrcodeActivity extends BaseActivity {
 
     @Override
     public void finish(){
-        // 有10秒钟左右的延迟
+        // Có độ trễ khoảng 10 giây
         if (mSwitch.isChecked() && mQrCodeUtil != null) {
             mQrCodeUtil.setLedState(QrCodeUtil.LED_STATE_OFF);
             mQrCodeUtil.setFocusLedState(QrCodeUtil.LED_STATE_OFF);

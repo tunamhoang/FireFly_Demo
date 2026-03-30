@@ -19,11 +19,11 @@ import com.firefly.id_card.IDCardConfig;
  * 2.支持ICCard和IDCard 即身份证
  */
 public class IDCardActivity extends BaseActivity implements IDCardUtil.IDCardCallBack {
-    //是否连接上后台服务
+    // Trạng thái đã kết nối dịch vụ nền hay chưa
     private boolean isMachineConnect = false;
     private int mReadMode;
     private int mICcardType = IDCardConfig.ICCARD_TYPE_TYPEA;
-    private int mIDCardReadCount = 0;//身份证读卡次数
+    private int mIDCardReadCount = 0;// Số lần đọc thẻ căn cước
 
     private TextView mIDcardDeviceConnect;
     private ImageView mIDcardHeadIcon;
@@ -62,9 +62,9 @@ public class IDCardActivity extends BaseActivity implements IDCardUtil.IDCardCal
         mICcardTypeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int id) {
-                if (id == R.id.iccard_read_typea) {//iccard的大端模式
+                if (id == R.id.iccard_read_typea) {// Chế độ big-endian cho ICCard
                     idCardUtil.setICCardEndianMode(true);
-                } else if (id == R.id.iccard_read_typeb) {//iccard的小端模式
+                } else if (id == R.id.iccard_read_typeb) {// Chế độ little-endian cho ICCard
                     idCardUtil.setICCardEndianMode(false);
                 }
                 mICCardID.setText(null);
@@ -75,12 +75,12 @@ public class IDCardActivity extends BaseActivity implements IDCardUtil.IDCardCal
         mModeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int id) {
-                if (id == R.id.idcard_mode_rb_idcard) {//身份证
+                if (id == R.id.idcard_mode_rb_idcard) {// Căn cước công dân
                     setVisibility(true, R.id.lyt_idcard);
                     setVisibility(false, R.id.lyt_iccard);
                     mReadMode = IDCardConfig.READCARD_MODE_IDENTITY_CARD;
 
-                } else if (id == R.id.idcard_mode_rb_iccard) { //IC卡
+                } else if (id == R.id.idcard_mode_rb_iccard) { // Thẻ IC
                     setVisibility(false, R.id.lyt_idcard);
                     setVisibility(true, R.id.lyt_iccard);
                     mReadMode = IDCardConfig.READCARD_MODE_IC_CARD;
@@ -121,7 +121,7 @@ public class IDCardActivity extends BaseActivity implements IDCardUtil.IDCardCal
         }
 
         switch (mReadMode) {
-            case IDCardConfig.READCARD_MODE_IDENTITY_CARD://身份证
+            case IDCardConfig.READCARD_MODE_IDENTITY_CARD:// Căn cước công dân
                 mIDCardReadCount = 0;
                 mIDcardReadCount.setText(mIDCardReadCount + "");
                 mIDcardMessage.setText(null);
@@ -185,7 +185,7 @@ public class IDCardActivity extends BaseActivity implements IDCardUtil.IDCardCal
         Tools.debugLog("onModeChanged:" + mode);
     }
 
-    //获取身份证信息
+    // Lấy thông tin thẻ căn cước
     @Override
     public void onSwipeIDCard(final IDCardBean info) {
         runOnUiThread(new Runnable() {

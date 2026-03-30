@@ -533,7 +533,7 @@ public class Tools {
         return bitmap;
     }
 
-    //保存bitmap本地图片
+    // Lưu bitmap ra bộ nhớ cục bộ
     public static boolean saveBitmap2Jpeg(Bitmap bitmap, String path) {
         if(bitmap == null || TextUtils.isEmpty(path)){
             return false;

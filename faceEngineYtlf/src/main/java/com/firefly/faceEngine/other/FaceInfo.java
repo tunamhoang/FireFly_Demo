@@ -9,13 +9,13 @@ public class FaceInfo {
     private ArcternImage arcternImage;
     private ArcternAttribute[][] attributes;
     private long searchId;
-    private float faceQualityConfidence = 0f;//人脸质量 范围0-1
+    private float faceQualityConfidence = 0f;// Chất lượng khuôn mặt 范围0-1
     private float genderConfidence = 0f;//性别 范围0-1
-    private float livenessConfidence; //活体 置信度
-    private boolean isFaceMask; //口罩
-    private int liveLabel; //活体  0未知，1活体，－1非活体
-    private int gender; //性别  0未知，1男，2女
-    private int age; //年龄
+    private float livenessConfidence; // Kiểm tra sống 置信度
+    private boolean isFaceMask; // Khẩu trang
+    private int liveLabel; // Kiểm tra sống  0未知，1活体，－1非活体
+    private int gender; // Giới tính  0未知，1男，2女
+    private int age; // Tuổi
 
     public FaceInfo() {
 

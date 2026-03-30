@@ -44,7 +44,7 @@ public class AppMainActivity extends ListActivity {
 
         checkPermission();
         if (Tools.isApkDebugable()) {
-            //startActivity((Intent) getData().get(2).get("intent"));
+            //startActivity((Intent) getData().get(2).get("intent")); // Mở nhanh màn hình debug khi cần
         }
     }
 
@@ -123,10 +123,10 @@ public class AppMainActivity extends ListActivity {
         if (requestCode == 1000) {
             for (int i = 0; i < grantResults.length; i++) {
                 if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
-                    // 重新申请权限
+                    // Yêu cầu lại quyền
                     //checkPermission();
 
-                    //Tools.toast("拒绝权限，将无法使用程序。");
+                    //Tools.toast("Từ chối quyền sẽ khiến ứng dụng không thể hoạt động.");
                     showWaringDialog();
                     return;
                 }
@@ -136,10 +136,10 @@ public class AppMainActivity extends ListActivity {
 
     private void showWaringDialog() {
         new AlertDialog.Builder(this)
-                .setTitle("Warning")
-                .setMessage("Denying permission will make it impossible to use the program.\n\n" +
-                        "Or please go to: Settings -> Application -> Permissions -> Permissions to open the relevant permissions, otherwise the function will not work properly!")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setTitle("Cảnh báo")
+                .setMessage("Nếu từ chối quyền, ứng dụng sẽ không thể sử dụng.\n\n" +
+                        "Vui lòng vào: Cài đặt -> Ứng dụng -> Quyền để bật các quyền cần thiết, nếu không chức năng sẽ không hoạt động đúng.")
+                .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         checkPermission();
@@ -148,7 +148,7 @@ public class AppMainActivity extends ListActivity {
                 }).show();
     }
 
-    //权限通过
+    // Đã được cấp quyền
     protected void permissionGrant() {
     }
 }

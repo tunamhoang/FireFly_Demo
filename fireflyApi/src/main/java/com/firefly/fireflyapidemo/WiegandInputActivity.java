@@ -13,7 +13,7 @@ public class WiegandInputActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_default);
-        //韦根输入
+        // Nhận tín hiệu Wiegand đầu vào
         HardwareCtrl.openRecvMiegandSignal("/dev/wiegand");
         HardwareCtrl.recvWiegandSignal(new RecvWiegandCallBack() {
             @Override

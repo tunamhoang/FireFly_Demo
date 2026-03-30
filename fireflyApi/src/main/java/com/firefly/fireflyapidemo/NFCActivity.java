@@ -13,7 +13,7 @@ public class NFCActivity extends BaseActivity implements NfcUtil.OnNfcListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_default);
         if (NfcUtil.getInstance().isSupport()) {
-            //初始化nfc读卡
+            // Khởi tạo đọc thẻ NFC
             NfcUtil.getInstance().setOnNfcListener(this);
             setVisibility(true, R.id.txt);
             setVisibility(false, R.id.txt_not_support);
